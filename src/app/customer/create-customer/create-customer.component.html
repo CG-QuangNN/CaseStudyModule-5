@@ -1,0 +1,172 @@
+<form [formGroup]="createCustomerForm" (ngSubmit)="saveCustomer()">
+  <section >
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-6">
+              <div class="col">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase" style="text-align: center">Thêm mới khách hàng</h3>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example"><h6>Mã khách hàng</h6></label>
+                    <input type="text" id="form3Example" class="form-control form-control-lg" name="code" formControlName="code"/>
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('code')?.errors?.required &&
+                      createCustomerForm.get('code').touched">
+                    Không được để trống
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('code')?.errors?.pattern &&
+                      createCustomerForm.get('code').touched">
+                    Vui lòng nhập đúng định dạng. (KH-XXXX) trong đó X là số từ (0-9)!
+                  </div>
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example"><h6>Tên Khách hàng</h6></label>
+                      <input  type="text" id="form3Examples" class="form-control form-control-lg" name="nane"
+                              formControlName="name" />
+                    </div>
+                    <div class="alert alert-danger" role = "alert"
+                         *ngIf ="createCustomerForm.get('name')?.errors?.required&&
+                      createCustomerForm.get('name').touched">
+                      Không được để trống
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example"><h6>Ngày sinh</h6></label>
+                      <input type="date" id="form3Example99" class="form-control form-control-lg"
+                             name="birthday" formControlName="birthday" />
+                    </div>
+                    <div class="alert alert-danger" role = "alert"
+                         *ngIf ="createCustomerForm.get('birthday')?.errors?.required &&
+                      createCustomerForm.get('birthday').touched">
+                      Không được để trống
+                    </div>
+                    <div class="alert alert-danger" role = "alert"
+                         *ngIf ="createCustomerForm.get('birthday').hasError('ageUnder') &&
+                      createCustomerForm.get('birthday').touched">
+                      Phải lơn hơn 18 tuổi mới trưởng thành!
+                    </div>
+
+                  <div class="form-outline mb-4">
+                    <div>
+                      <label class="form-label"><h6>Giới Tính</h6></label>
+                    </div>
+                    <div>
+                      <input type="radio" class="mx-2" value="null" formControlName="gender">LGBT
+                      <input type="radio" class="mx-2" value="true" formControlName="gender">Nam 🙎‍♂
+                      <input type="radio" class="mx-2" value="false" formControlName="gender">Nữ 🙎🏻‍♀
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="createCustomerForm.get('gender').errors?.required &&  createCustomerForm.get('gender').touched"
+                    style="color: red">
+                    Vui lòng Không được để trống!
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example"><h6>Số CMNH/CCCD</h6></label>
+                    <input  type="text" id="form3Examplees" class="form-control form-control-lg" name="idCard"
+                              formControlName="idCard" />
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                     *ngIf ="createCustomerForm.get('idCard')?.errors?.required&&
+                     createCustomerForm.get('idCard').touched">
+                     Không được để trống
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                      *ngIf ="createCustomerForm.get('idCard')?.errors?.pattern &&
+                      createCustomerForm.get('idCard').touched">
+                      Vui lòng nhập đúng định dạng gồm 9 hoặc 10 chữ số!
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example"><h6>Số Điện thoại</h6></label>
+                    <input  type="text" id="form3Exaplees" class="form-control form-control-lg" name="phone"
+                            formControlName="phone" />
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                      *ngIf ="createCustomerForm.get('phone')?.errors?.required&&
+                      createCustomerForm.get('phone').touched">
+                      Không được để trống
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                      *ngIf ="createCustomerForm.get('phone')?.errors?.pattern &&
+                      createCustomerForm.get('phone').touched">
+                      Vui lòng nhập đúng định dạng.
+                      Bắt đầu là 0 hoặc +84 và tiếp theo là đầu số |3|5|7|9. Ví dụ: 0905678123, 0352960280, +84912345678!
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example"><h6>Email</h6></label>
+                    <input  type="text" id="form3Exaplee" class="form-control form-control-lg" name="email"
+                            formControlName="email" />
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('email')?.errors?.required&&
+                      createCustomerForm.get('email').touched">
+                    Không được để trống
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('email')?.errors?.email &&
+                      createCustomerForm.get('email').touched">
+                    Vui lòng nhập đúng định dạng của email!
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example"><h6>Địa chỉ</h6></label>
+                    <input  type="text" id="form3Exaple" class="form-control form-control-lg" name="address"
+                            formControlName="address" />
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('address')?.errors?.required&&
+                      createCustomerForm.get('address').touched">
+                    Không được để trống
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('address')?.errors?.minlength &&
+                      createCustomerForm.get('address').touched">
+                    Vui lòng nhâp lớn hơn 6 ký tự!!
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example8"><h6>Loại khách hàng</h6></label>
+                    <select class="form-select" id="form3Example8" name="customerType" formControlName="customerType">
+                      <option value="" selected>--Chọn--</option>
+                      <option [ngValue]="customerType" *ngFor="let customerType of listType">{{customerType.nameType}}</option>
+                    </select>
+                  </div>
+                  <div class="alert alert-danger" role = "alert"
+                       *ngIf ="createCustomerForm.get('customerType')?.errors?.required&&
+                      createCustomerForm.get('customerType').touched">
+                    Không được để trống
+                  </div>
+
+
+                  <div class="d-flex justify-content-end">
+
+                    <mat-form-field appearance="fill" hidden>
+                      <mat-label>Message</mat-label>
+                      <input matInput value="Tạo mới khách hàng thành công!" #message>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" hidden>
+                      <mat-label>Action</mat-label>
+                      <input matInput value="OK!" #action>
+                    </mat-form-field>
+
+                      <button type="submit" class="btn btn-primary m-3" (click)="openSnackBar(message.value, action.value)" >Lưu</button>
+                    <a type="button" class="btn btn-primary m-3" routerLink="/customer" >Trở về</a>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+    </div>
+  </section>
+</form>
+

@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <h1 style="text-align: center">Danh sách khách hàng</h1>
+  <br>
+  <div class="row">
+    <div class="col">
+      <input type="text" style="border-radius: 10px" placeholder="Nhập tên" #element>
+      <button (click)="searchByName(element.value)" style="background-color: forestgreen; border-radius: 10px">
+        <a style="color: white">Tìm Kiếm</a></button>
+    </div>
+    <div class="col">
+      <a class="btn btn-success" routerLink="/create-customer" style="margin-left: 500px;
+      margin-bottom: 10px">Thêm mới Khách Hàng</a>
+    </div>
+  </div>
+
+
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr style="text-align: center" class="table-warning">
+      <th>Tên</th>
+      <th>Mã Khách hàng</th>
+      <th>Ngày sinh</th>
+      <th>Giới tính</th>
+      <th>CMNH</th>
+      <th>Số điện thoại</th>
+      <th>Email</th>
+      <th>Địa chỉ</th>
+      <th>Loại khách hàng</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 7, currentPage: p }">
+      <td>{{customer.name | titlecase}}</td>
+      <td>{{customer.code}}</td>
+      <td>{{customer.birthday | date : 'dd/MM/yyyy'}}</td>
+      <td style="text-align: center">{{customer.gender?'Nam🙎🏻‍♂':(customer.gender == null?'LGBT':'Nữ 🙎🏻‍♀')}}</td>
+      <td>{{customer.idCard}}</td>
+      <td>{{customer.phone}}</td>
+      <td>{{customer.email}}</td>
+      <td>{{customer.address}}</td>
+      <td style="text-align: center">{{customer.customerType.nameType}}</td>
+      <td>
+        <button type="button" class="btn btn-success m-1" [routerLink]="['/edit-customer', customer.id]">Sửa</button>
+        <!-- Button trigger modal -->
+        <button class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="getValue(customer)">Xóa</button>
+        <button type="button" class="btn btn-warning m-1" [routerLink]="['/viewCustomer',customer.id]">
+          Thông tin
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="color: red">
+            Bạn có muốn xóa khách hàng <span *ngIf="customerDelete">{{customerDelete.name}}</span> không?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Trở về</button>
+
+            <mat-form-field appearance="fill" hidden>
+              <mat-label>Message</mat-label>
+              <input matInput value="Xóa khách hàng thành công!" #message>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" hidden>
+              <mat-label>Action</mat-label>
+              <input matInput value="OK!" #action>
+            </mat-form-field>
+
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="deleteCustomer(customerDelete.id); openSnackBar(message.value, action.value)">Xâc nhận</button>
+          </div>
+          <input type="hidden" name="id" id="id-customer">
+        </div>
+      </div>
+    </div>
+</div>
+<br>
+
+<div class="container">
+  <div align="center">
+    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
